@@ -1,4 +1,5 @@
 {
+  "homepage": "https://jetske.github.io/make-sense",
   "name": "make-sense",
   "version": "1.11.0-alpha",
   "private": true,
@@ -38,7 +39,8 @@
     "preview": "vite preview --host --port 3000",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/**/*.ts src/**.tsx"
+    "lint": "eslint src/**/*.ts src/**.tsx",
+    "deploy": "gh-pages -d dist"
   },
   "browserslist": {
     "production": [
