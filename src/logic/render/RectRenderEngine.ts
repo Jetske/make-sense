@@ -274,8 +274,7 @@ export class RectRenderEngine extends BaseRenderEngine {
         };
         const innerRect: IRect = RectUtil.expand(rectOnImage, innerRectDelta);
 
-        return (RectUtil.isPointInside(outerRect, data.mousePositionOnViewPortContent) &&
-            !RectUtil.isPointInside(innerRect, data.mousePositionOnViewPortContent));
+        return (RectUtil.isPointInside(outerRect, data.mousePositionOnViewPortContent)); 
     }
 
     private getAnchorUnderMouseByRect(rect: IRect, mousePosition: IPoint, imageRect: IRect): RectAnchor {

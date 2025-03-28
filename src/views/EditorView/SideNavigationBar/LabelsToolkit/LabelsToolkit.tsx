@@ -51,9 +51,9 @@ class LabelsToolkit extends React.Component<IProps, IState> {
             ] :
             [
                 LabelType.RECT,
-                LabelType.POINT,
-                LabelType.LINE,
-                LabelType.POLYGON
+                // LabelType.POINT,
+                // LabelType.LINE,
+                // LabelType.POLYGON
             ];
 
         const activeTab: LabelType = props.activeLabelType ? props.activeLabelType : this.tabs[0];

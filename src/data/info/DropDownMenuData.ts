@@ -51,22 +51,22 @@ export const DropDownMenuData: DropDownMenuNode[] = [
                 disabled: false,
                 onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.EXPORT_ANNOTATIONS))
             },
-            {
-                name: 'Run AI locally',
-                description: 'Run annotation model in browser',
-                imageSrc: 'ico/ai.png',
-                imageAlt: 'load-ai-model-in-browser',
-                disabled: false,
-                onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.LOAD_AI_MODEL))
-            },
-            {
-                name: 'Connect AI server',
-                description: 'Run annotation model on server',
-                imageSrc: 'ico/api.png',
-                imageAlt: 'connect-ai-server',
-                disabled: false,
-                onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.CONNECT_AI_MODEL_VIA_API))
-            },
+            // {
+            //     name: 'Run AI locally',
+            //     description: 'Run annotation model in browser',
+            //     imageSrc: 'ico/ai.png',
+            //     imageAlt: 'load-ai-model-in-browser',
+            //     disabled: false,
+            //     onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.LOAD_AI_MODEL))
+            // },
+            // {
+            //     name: 'Connect AI server',
+            //     description: 'Run annotation model on server',
+            //     imageSrc: 'ico/api.png',
+            //     imageAlt: 'connect-ai-server',
+            //     disabled: false,
+            //     onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.CONNECT_AI_MODEL_VIA_API))
+            // },
         ]
     },
     {

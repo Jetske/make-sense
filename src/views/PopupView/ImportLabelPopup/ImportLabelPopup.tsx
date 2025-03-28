@@ -90,13 +90,41 @@ const ImportLabelPopup: React.FC<IProps> = (
         }
     });
 
+    const hslToHex = (h: number, s: number, l: number): string => {
+        s /= 100;
+        l /= 100;
+    
+        const f = (n: number) => {
+            const k = (n + h / 30) % 12;
+            const a = s * Math.min(l, 1 - l);
+            return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))));
+        };
+    
+        return `#${f(0).toString(16).padStart(2, "0")}${f(8).toString(16).padStart(2, "0")}${f(4).toString(16).padStart(2, "0")}`;
+    };
+
+    const generateDistinctColors = (count: number): string[] => {
+        return Array.from({ length: count }, (_, i) => {
+            const hue = (i * 360) / count; // Evenly spread hues
+            return hslToHex(hue, 80, 50); // Convert HSL to Hex
+        });
+    };
+
+
     const onAccept = (type: LabelType) => {
+        const colors = generateDistinctColors(loadedLabelNames.length); // Generate evenly spaced colors
+        const newLabelNames = loadedLabelNames.map((labelName, index) => ({
+            ...labelName,
+            color: colors[index]
+        }));
+
         if (loadedLabelNames.length !== 0 && loadedImageData.length !== 0) {
             updateImageDataAction(loadedImageData);
-            updateLabelNamesAction(loadedLabelNames);
+            updateLabelNamesAction(newLabelNames);
             updateActiveLabelTypeAction(type);
             PopupActions.close();
         }
+
     };
 
     const onReject = (_: LabelType) => {

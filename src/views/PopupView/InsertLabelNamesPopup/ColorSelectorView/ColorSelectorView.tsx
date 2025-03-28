@@ -14,10 +14,5 @@ export const ColorSelectorView: React.FC<IProps> = ({color, onClick}) => {
         }}
         onClick={onClick}
     >
-        <img
-            draggable={false}
-            alt={'refresh'}
-            src={'ico/refresh.png'}
-        />
     </div>
 }
