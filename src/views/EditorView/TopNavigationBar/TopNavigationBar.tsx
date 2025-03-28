@@ -66,8 +66,8 @@ const TopNavigationBar: React.FC<IProps> = (props) => {
                 </div>
                 <div className='NavigationBarGroupWrapper'>
                     <ImageButton
-                        image={'ico/github-logo.png'}
-                        imageAlt={'github-logo.png'}
+                        image={'make-sense/ico/github-logo.png'}
+                        imageAlt={'make-sense/github-logo.png'}
                         buttonSize={{width: 30, height: 30}}
                         href={Settings.GITHUB_URL}
                     />
