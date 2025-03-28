@@ -1,6 +1,8 @@
 import {updateActivePopupType} from '../../store/general/actionCreators';
 import {PopupWindowType} from '../enums/PopupWindowType';
 import {store} from '../../index';
+import {RectLabelsExporter} from '../../logic/export/RectLabelsExporter';
+import {AnnotationFormatType} from '../enums/AnnotationFormatType';
 
 export type DropDownMenuNode = {
     name: string
@@ -49,7 +51,8 @@ export const DropDownMenuData: DropDownMenuNode[] = [
                 imageSrc: 'ico/export-labels.png',
                 imageAlt: 'export-labels',
                 disabled: false,
-                onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.EXPORT_ANNOTATIONS))
+                onClick: () => RectLabelsExporter.export(AnnotationFormatType.YOLO)
+                // onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.EXPORT_ANNOTATIONS))
             },
             // {
             //     name: 'Run AI locally',

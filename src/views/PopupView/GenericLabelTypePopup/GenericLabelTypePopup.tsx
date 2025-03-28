@@ -41,13 +41,13 @@ const GenericLabelTypePopup: React.FC<IProps> = (
 
     const getSidebarButtons = () => {
         return LabelToolkitData
-            .filter((label: ILabelToolkit) => label.projectType === projectType)
-            .map((label: ILabelToolkit) => {
-                return <ImageButton
+            .filter((label: ILabelToolkit) => label.projectType === projectType && label.labelType === LabelType.RECT) // Only allow LabelType.RECT
+            .map((label: ILabelToolkit) => (
+                <ImageButton
                     key={label.labelType}
                     image={label.imageSrc}
                     imageAlt={label.imageAlt}
-                    buttonSize={{width: 40, height: 40}}
+                    buttonSize={{ width: 40, height: 40 }}
                     padding={20}
                     onClick={() => {
                         setLabelType(label.labelType);
@@ -55,8 +55,8 @@ const GenericLabelTypePopup: React.FC<IProps> = (
                     }}
                     isActive={labelType === label.labelType}
                 />
-            })
-    }
+            ));
+    };
 
     const renderContent = () => {
         return (<div className='GenericLabelTypePopupContent'>

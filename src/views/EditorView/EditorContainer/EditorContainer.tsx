@@ -63,7 +63,7 @@ const EditorContainer: React.FC<IProps> = (
         return <>
             <VerticalEditorButton
                 label='Images'
-                image={'/make-sense/ico/camera.png'}
+                image={'/ico/camera.png'}
                 imageAlt={'images'}
                 onClick={leftSideBarButtonOnClick}
                 isActive={leftTabStatus}
@@ -88,7 +88,7 @@ const EditorContainer: React.FC<IProps> = (
         return <>
             <VerticalEditorButton
                 label='Labels'
-                image={'/make-sense/ico/tags.png'}
+                image={'/ico/tags.png'}
                 imageAlt={'labels'}
                 onClick={rightSideBarButtonOnClick}
                 isActive={rightTabStatus}

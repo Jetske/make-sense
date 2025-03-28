@@ -38,7 +38,7 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
             props.updateActiveImageIndexAction(0);
             props.addImageDataAction(files.map((file:File) => ImageDataUtil
                 .createImageDataFromFileData(file)));
-            props.updateActivePopupTypeAction(PopupWindowType.INSERT_LABEL_NAMES);
+            props.updateActivePopupTypeAction(PopupWindowType.IMPORT_ANNOTATIONS);
         }
     };
 
@@ -87,7 +87,7 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
             </div>
             <div className='DropZoneButtons'>
                 <TextButton
-                    label={'Object Detection'}
+                    label={'Start'}
                     isDisabled={!acceptedFiles.length}
                     onClick={startEditorWithObjectDetection}
                 />

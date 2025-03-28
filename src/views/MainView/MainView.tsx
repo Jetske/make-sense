@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MainView.scss';
 import { TextButton } from '../Common/TextButton/TextButton';
 import classNames from 'classnames';
@@ -16,6 +16,12 @@ const MainView: React.FC = () => {
 
     const startProject = () => {
         setProjectInProgress(true);
+    };
+
+    const StartDirectly = () => {
+        useEffect(() => {
+            startProject();
+        }, []); // Empty dependency array ensures it runs once on mount
     };
 
     const endProject = () => {
@@ -121,6 +127,7 @@ const MainView: React.FC = () => {
                     onClick={endProject}
                 />}
             </div>
+            {StartDirectly()}
             <div className='RightColumn'>
                 <div />
                 <ImagesDropZone />

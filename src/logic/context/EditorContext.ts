@@ -106,28 +106,28 @@ export class EditorContext extends BaseContext {
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["t"] : ["t"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["c"] : ["c"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(1);
                 EditorActions.fullRender();
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["c"] : ["c"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["r"] : ["r"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(2);
                 EditorActions.fullRender();
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["r"] : ["r"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["b"] : ["b"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(3);
                 EditorActions.fullRender();
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["b"] : ["b"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["Alt", "5"] : ["Control", "5"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(4);
                 EditorActions.fullRender();

@@ -59,11 +59,11 @@ const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
                 key={entry.type}
             >
                 {entry.type === exportFormatType ?
-                    <img
-                        draggable={false}
-                        src={'ico/checkbox-checked.png'}
-                        alt={'checked'}
-                    /> :
+                <img
+                    draggable={false}
+                    src={'ico/checkbox-checked.png'}
+                    alt={'checked'}
+                /> :
                     <img
                         draggable={false}
                         src={'ico/checkbox-unchecked.png'}
