@@ -46,8 +46,8 @@ const TopNavigationBar: React.FC<IProps> = (props) => {
                     >
                         <img
                             draggable={false}
-                            alt={'make-sense'}
-                            src={'/make-sense-ico-transparent.png'}
+                            alt={'make-sense-ico-transparent.png'}
+                            src={'make-sense/make-sense-ico-transparent.png'}
                         />
                         Make Sense
                     </div>
@@ -66,8 +66,8 @@ const TopNavigationBar: React.FC<IProps> = (props) => {
                 </div>
                 <div className='NavigationBarGroupWrapper'>
                     <ImageButton
-                        image={'make-sense/ico/github-logo.png'}
-                        imageAlt={'make-sense/github-logo.png'}
+                        image={'/make-sense/ico/github-logo.png'}
+                        imageAlt={'github-logo.png'}
                         buttonSize={{width: 30, height: 30}}
                         href={Settings.GITHUB_URL}
                     />
