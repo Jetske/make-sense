@@ -127,14 +127,14 @@ export class EditorContext extends BaseContext {
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["Alt", "5"] : ["Control", "5"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["l", "l"] : ["l", "l"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(4);
                 EditorActions.fullRender();
             }
         },
         {
-            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["Alt", "6"] : ["Control", "6"],
+            keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["s", "s"] : ["s", "s"],
             action: (event: KeyboardEvent) => {
                 ImageActions.setActiveLabelOnActiveImage(5);
                 EditorActions.fullRender();
