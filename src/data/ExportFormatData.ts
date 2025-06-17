@@ -25,12 +25,8 @@ export const ExportFormatData: ExportFormatDataMap = {
     ],
     [LabelType.POLYGON]: [
         {
-            type: AnnotationFormatType.VGG,
-            label: 'Single file in VGG JSON format.'
-        },
-        {
-            type: AnnotationFormatType.COCO,
-            label: 'Single file in COCO JSON format.'
+            type: AnnotationFormatType.YOLO,
+            label: 'A .zip package containing files in YOLO format.'
         }
     ],
     [LabelType.IMAGE_RECOGNITION]: [

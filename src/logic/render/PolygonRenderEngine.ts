@@ -67,42 +67,56 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     }
 
     public mouseDownHandler(data: EditorData): void {
+        const event = data.event as MouseEvent
         const isMouseOverCanvas: boolean = RenderEngineUtil.isMouseOverCanvas(data);
-        if (isMouseOverCanvas) {
+        if (!isMouseOverCanvas) return;
+
+        const polygonUnderMouse: LabelPolygon = this.getPolygonUnderMouse(data);
+        if (polygonUnderMouse) {
+            const anchorIndex = polygonUnderMouse.vertices.findIndex(anchor => {
+                const anchorOnCanvas = RenderEngineUtil.transferPointFromImageToViewPortContent(anchor, data);
+                return this.isMouseOverAnchor(data.mousePositionOnViewPortContent, anchorOnCanvas);
+            });
+
+            if (anchorIndex !== -1) {
+                if (event.shiftKey) {
+                    // Shift + click on anchor -> delete that anchor point immediately
+                    polygonUnderMouse.vertices.splice(anchorIndex, 1);
+
+                    // Dispatch updates here so UI reflects the change right away
+                    const imageData = LabelsSelector.getActiveImageData();
+                    store.dispatch(updateImageDataById(imageData.id, imageData));
+
+                    // Optionally clear active/selected if polygon no longer valid
+                    if (polygonUnderMouse.vertices.length < 3) {
+                        store.dispatch(updateActiveLabelId(null));
+                    }
+                    return; // Early return, so no other logic runs
+                } else {
+                    // Normal click on anchor -> start resizing or dragging
+                    this.startExistingLabelResize(data, polygonUnderMouse.id, anchorIndex);
+                    return;
+                }
+            }
+
+            // If not clicking on an anchor point:
+            store.dispatch(updateActiveLabelId(polygonUnderMouse.id));
+
+            const isMouseOverNewAnchor = this.isMouseOverAnchor(data.mousePositionOnViewPortContent, this.suggestedAnchorPositionOnCanvas);
+            if (isMouseOverNewAnchor) {
+                this.addSuggestedAnchorToPolygonLabel(data);
+            }
+        } else {
+            // No polygon under mouse, proceed with normal creation/update
             if (this.isCreationInProgress()) {
-                const isMouseOverStartAnchor: boolean = this.isMouseOverAnchor(
-                    data.mousePositionOnViewPortContent, this.activePath[0]);
+                const isMouseOverStartAnchor = this.isMouseOverAnchor(data.mousePositionOnViewPortContent, this.activePath[0]);
                 if (isMouseOverStartAnchor) {
                     this.addLabelAndFinishCreation(data);
-                } else  {
-                    this.updateActivelyCreatedLabel(data);
-                }
-            } else {
-                const polygonUnderMouse: LabelPolygon = this.getPolygonUnderMouse(data);
-                if (!!polygonUnderMouse) {
-                    const anchorIndex: number = polygonUnderMouse.vertices.reduce(
-                        (indexUnderMouse: number, anchor: IPoint, index: number) => {
-                        if (indexUnderMouse === null) {
-                            const anchorOnCanvas: IPoint = RenderEngineUtil.transferPointFromImageToViewPortContent(anchor, data);
-                            if (this.isMouseOverAnchor(data.mousePositionOnViewPortContent, anchorOnCanvas)) {
-                                return index;
-                            }
-                        }
-                        return indexUnderMouse;
-                    }, null);
-
-                    if (anchorIndex !== null) {
-                        this.startExistingLabelResize(data, polygonUnderMouse.id, anchorIndex);
-                    } else {
-                        store.dispatch(updateActiveLabelId(polygonUnderMouse.id));
-                        const isMouseOverNewAnchor: boolean = this.isMouseOverAnchor(data.mousePositionOnViewPortContent, this.suggestedAnchorPositionOnCanvas);
-                        if (isMouseOverNewAnchor) {
-                            this.addSuggestedAnchorToPolygonLabel(data);
-                        }
-                    }
                 } else {
                     this.updateActivelyCreatedLabel(data);
                 }
+            } else {
+                this.updateActivelyCreatedLabel(data);
             }
         }
     }
@@ -306,6 +320,16 @@ export class PolygonRenderEngine extends BaseRenderEngine {
         store.dispatch(updateFirstLabelCreatedFlag(true));
         store.dispatch(updateActiveLabelId(labelPolygon.id));
     };
+
+    private removeAnchorFromPolygon(polygonId: string, anchorIndex: number): void {
+        const imageData: ImageData = LabelsSelector.getActiveImageData();
+        const polygon = imageData.labelPolygons.find(p => p.id === polygonId);
+        if (!polygon) return;
+
+        polygon.vertices.splice(anchorIndex, 1);
+
+        store.dispatch(updateImageDataById(imageData.id, imageData));
+    }
 
     // =================================================================================================================
     // TRANSFER

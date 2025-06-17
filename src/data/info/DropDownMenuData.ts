@@ -51,8 +51,8 @@ export const DropDownMenuData: DropDownMenuNode[] = [
                 imageSrc: 'ico/export-labels.png',
                 imageAlt: 'export-labels',
                 disabled: false,
-                onClick: () => RectLabelsExporter.export(AnnotationFormatType.YOLO)
-                // onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.EXPORT_ANNOTATIONS))
+                // onClick: () => RectLabelsExporter.export(AnnotationFormatType.YOLO)
+                onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.EXPORT_ANNOTATIONS))
             },
             // {
             //     name: 'Run AI locally',

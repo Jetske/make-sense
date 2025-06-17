@@ -8,6 +8,7 @@ import {YOLOUtils} from './YOLOUtils';
 import {ImageDataUtil} from '../../../utils/ImageDataUtil';
 import {zip, find} from 'lodash';
 import {ImageRepository} from '../../imageRepository/ImageRepository';
+import { updateImageDragModeStatus } from 'src/store/general/actionCreators';
 
 export type YOLOFilesSpec = {
     labelNameFile: File
@@ -78,12 +79,14 @@ export class YOLOImporter extends AnnotationImporter {
 
     public static applyAnnotations(imageData: ImageData, rawAnnotations: string, labelNames: LabelName[]): ImageData {
         const image: HTMLImageElement = ImageRepository.getById(imageData.id);
-        imageData.labelRects = YOLOUtils.parseYOLOAnnotationsFromString(
+        const parsed = YOLOUtils.parseYOLOAnnotationsFromString(
             rawAnnotations,
             labelNames,
             {width: image.width, height: image.height},
             imageData.fileData.name
         );
+        imageData.labelRects = parsed.rects;
+        imageData.labelPolygons = parsed.polygons;
         return imageData;
     }
 
